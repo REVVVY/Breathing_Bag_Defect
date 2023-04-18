@@ -1,6 +1,8 @@
-FROM python:3.7.16
+FROM python:3.6
 
-WORKDIR /usr/src/app
+WORKDIR /usr/app
+
+#RUN apt-get update && apt-get install -y python3-opencv libgl1
 
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt

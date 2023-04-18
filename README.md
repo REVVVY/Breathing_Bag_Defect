@@ -16,3 +16,9 @@ Conainer status
 ```
 docker container ls
 ```
+
+Rebuild docker service and run container
+
+```
+docker compose up --no-deps --build bb
+```
