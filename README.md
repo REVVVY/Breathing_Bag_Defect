@@ -2,13 +2,13 @@
 Build Docker image
 
 ```
-docker build -t bbdefect .
+sudo docker build -t bbdefect .
 ```
 
 run build image
 
 ```
-docker run --gpus=all -it -p 8888:8888 -v ".:/usr/app" --rm --name bbdefect
+sudo docker run --gpus=all -it -p 8888:8888 -v "$(pwd):/usr/app" --rm --name bbdefect bbdefect
 ```
 
 Conainer status
@@ -45,3 +45,8 @@ nano id_rsa.pub
 sudo chmod 400 id_rsa
 ```
 
+## Upload Dataset
+
+```
+scp -r Dataset4 ubuntu@address:path
+```
