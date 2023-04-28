@@ -1,6 +1,3 @@
 .ipynb_checkpoints
-Mask_RCNN/Dataset4/*
-Mask_RCNN/Dataset/*
-/weights/*
-/weights.tar.gz
-/weights.zip
+Mask_RCNN/Dataset*
+/weights*
