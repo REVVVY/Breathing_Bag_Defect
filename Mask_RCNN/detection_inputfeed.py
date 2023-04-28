@@ -1,13 +1,18 @@
 import cv2
 import os
 import matplotlib.pyplot as plt
+from PIL import Image
 import datetime
+from mrcnn import utils as poop
+input_dir = "C:\\Users\\Johan\\Documents\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset\\train\\im_28.jpg"
 
-input_dir = r'Den här datorn\Redmi Note 11 Pro 5G\Delat internt lagringsutrymme\DCIM\Camera\IMG_20221229_171134.jpg'
-
+#img = Image.open(input_dir)
+#new_im = poop.resize_image(img,800,1014,0,mode="square")
+#new_im.save("C:\\Users\\Johan\\Documents\\Breathing_Bag_Defect\\Mask_RCNN\\test.jpg")
 img = cv2.imread(input_dir)
-cv2.imshow("kukbajs", img)
+cv2.imshow("kuk",img)
 cv2.waitKey(0)
+
 
 
 """
