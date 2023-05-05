@@ -120,7 +120,7 @@ class CustomDataset(utils.Dataset):
 
 # %%
 model_dir = ""
-weight_path = "C:\\Breathing_Bag_Defect\\weights\\object20230427T1027\\mask_rcnn_object_0020.h5"
+weight_path = "C:\\Breathing_Bag_Defect\\weights\\object20230504T0910\\mask_rcnn_object_0030.h5"
 dataset_dir = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset"
 image_directory = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset\\val"
 
@@ -153,7 +153,7 @@ current_idx = 153
 
 # %%
 
-current_idx = 96
+current_idx = 0
 for i in range(current_idx, len(image_paths)):
     fig, (img_in, img_pr) = plt.subplots(1, 2, figsize=(16,10), dpi=200)
 
@@ -176,7 +176,7 @@ for i in range(current_idx, len(image_paths)):
 
     current_idx = (current_idx + 1) % len(image_paths)
 
-    plt.savefig(os.path.join("outputs_20", f"image_{current_idx}.png"))
+    plt.savefig(os.path.join("object20230504T0910", f"image_{current_idx}.png"))
 #plt.show()
 
 # %%

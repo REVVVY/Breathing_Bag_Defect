@@ -3,12 +3,12 @@ import json
 import shutil
 
 # Path to the training and validation JSON files
-TRAIN_JSON_PATH = "C:/Breathing_Bag_Defect/Mask_RCNN/Dataset_new/resize/train.json"
-VAL_JSON_PATH = "C:/Breathing_Bag_Defect/Mask_RCNN/Dataset_new/resize/val.json"
+TRAIN_JSON_PATH = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset_gen\\train.json"
+VAL_JSON_PATH = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset_gen\\val.json"
 
 # Path to the directory where the images should be moved
-TRAIN_DIR = "C:/Breathing_Bag_Defect/Mask_RCNN/Dataset_new/resize/train"
-VAL_DIR = "C:/Breathing_Bag_Defect/Mask_RCNN/Dataset_new/resize/val"
+TRAIN_DIR = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset_gen\\train"
+VAL_DIR = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset_gen\\val"
 
 # Make the new directories if they don't already exist
 os.makedirs(TRAIN_DIR, exist_ok=True)
