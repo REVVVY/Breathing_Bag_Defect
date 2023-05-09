@@ -1,5 +1,4 @@
 .ipynb_checkpoints
 Mask_RCNN/Dataset*
-/weights*
-output*
-object20230504T0910*
+object*
+Testset*

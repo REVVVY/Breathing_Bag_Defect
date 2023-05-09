@@ -2,7 +2,7 @@ import json
 import random
 
 # Load the original JSON file
-with open('Dataset_gen\\dataset.json') as f:
+with open('C:\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset_manual\\output_annotations.json') as f:
     annotations = json.load(f)
 
 # Get a list of image IDs
@@ -27,8 +27,8 @@ for image_id in val_ids:
     val_annotations[image_id] = annotations[image_id]
 
 # Save the new annotation files
-with open('Dataset_gen\\train.json', 'w') as f:
+with open('Dataset_manual\\train.json', 'w') as f:
     json.dump(train_annotations, f)
 
-with open('Dataset_gen\\val.json', 'w') as f:
+with open('Dataset_manual\\val.json', 'w') as f:
     json.dump(val_annotations, f)

@@ -60,7 +60,7 @@ class CustomDataset(utils.Dataset):
 
         assert subset in ["train", "val"]
         dataset_dir = os.path.join(dataset_dir, subset)
-        annotations1 = json.load(open('C:\Breathing_Bag_Defect\Mask_RCNN\Dataset\\' + subset + '\\dataset.json'))
+        annotations1 = json.load(open('C:\Breathing_Bag_Defect\Mask_RCNN\Dataset_gen\\' + subset + '\\dataset.json'))
 
         annotations = list(annotations1.values())  # don't need the dict keys
 
@@ -120,9 +120,9 @@ class CustomDataset(utils.Dataset):
 
 # %%
 model_dir = ""
-weight_path = "C:\\Breathing_Bag_Defect\\weights\\object20230504T0910\\mask_rcnn_object_0030.h5"
-dataset_dir = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset"
-image_directory = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset\\val"
+weight_path = "C:\\Breathing_Bag_Defect\\weights\\object20230506T0622\\mask_rcnn_object_0020.h5"
+dataset_dir = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset_gen"
+image_directory = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\Testset\\Test1"
 
 model = modellib.MaskRCNN(mode="inference", model_dir=model_dir, config=CustomConfig())
 print("Loading weights ", weight_path)
@@ -144,16 +144,17 @@ image_files.sort()
 image_paths = [os.path.abspath(os.path.join(image_directory, x)) for x in image_files]
 image_paths = list(filter(lambda x: os.path.splitext(x)[1].lower() == ".jpg", image_paths))
 
+
 dataset = CustomDataset()
 dataset.load_custom(dataset_dir, "val")
 dataset.prepare()
 
 # %%
-current_idx = 153
+current_idx = 0
 
 # %%
 
-current_idx = 0
+current_idx = 166
 for i in range(current_idx, len(image_paths)):
     fig, (img_in, img_pr) = plt.subplots(1, 2, figsize=(16,10), dpi=200)
 
@@ -176,7 +177,7 @@ for i in range(current_idx, len(image_paths)):
 
     current_idx = (current_idx + 1) % len(image_paths)
 
-    plt.savefig(os.path.join("object20230504T0910", f"image_{current_idx}.png"))
+    plt.savefig(os.path.join("object20230506T0622_20", f"image_{current_idx}.png"))
 #plt.show()
 
 # %%
