@@ -1,28 +1,30 @@
 Detection_min_conf = 0.8 och coco som startvikter på samtliga
 
 ###Dataset
-object20230427T1027: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. (Träna om)
+object20230427T1027: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. (Träna om) 								(---SPARAD---KLAR LIGGER I LOGS)
 object20230426T1708: anchor 8, 16 osv. 2000 steg. 4 images per gpu. Batch size: 4. Restartad efter epoch 12.  (Träna om)
 
 ###Omträning
 object20230503T0946: anchor 8, 16 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101 DATASET
 object20230503T2215: anchor 8, 16 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET50 DATASET
 object20230504T0910: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. Augmentation iaa.Fliplr(0.5), Gaussainblurr(sigma=0, 2.0) DATASET
-object20230505T1049: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATASETTEST (FÖR ATT SE HUR MAN SKA LABLA
+object20230505T1049: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATASETTEST (FÖR ATT SE HUR MAN SKA LABLA	(---SPARAD--- KLAR)
+object20230507T1226: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATASET_LAB (BARA EGEN LABLADE BILDER) 	(---SPARAD--- KLAR)
 
+#RAPPORTEN
+object20230506T0622: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATASET_GEN (BARA GENERERADE BILDER) 		(---SPARAD--- KLAR)
+object20230508T0832: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATASET_MIX (MIX BÅDA DATASET) 			(---SPARAD--- KLAR)
+object20230509T1215: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATASET_MANUEL (BARA EGEN LABLADE BILDER) 	(---SPARAD--- KLAR)
 
-object20230506T0622: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATASET_GEN (BARA GENERERADE BILDER)
-object20230507T1226: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATASET_LAB (BARA EGEN LABLADE BILDER)
-object20230508T0832: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATASET_MIX (MIX BÅDA DATASET)
-ONGOING - object20230509T1215: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATASET_MANUEL (BARA EGEN LABLADE BILDER)
-
+#Ytterligare tester
+object20230510T0752: anchor 2, 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATA augmentation 50% horizontal flip. DATASET_MANUEL (BARA EGEN LABLADE BILDER)object20230511T2201: anchor 2, 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATASET_MANUEL (BARA EGEN LABLADE BILDER)
 
 
 
 
 object20230425T1930: anchor 32, 64 osv. 2000 steg. 4 images per gpu. Batch size: 4.
 object20230428T1023: anchor 4, 8 osv. 900 steg. 2 image per gpu. Batch size: 2.
-object20230428T1052: anchor 4, 8 osv. training steps 755. validation steps 188. 2 images per gpu. Batch size: 2.
+object20230428T1052: anchor 4, 8 osv. training steps 755. validation steps 188. 2 images per gpu. Batch size: 2.		(---SPARAD--- KLAR)
 
 ###Forts
 object20230502T1241: anchor 8, 16 osv. 2360 steg. 580 val steg. Learning rate: 0.01. 4 images per gpu. Batch size: 4.
