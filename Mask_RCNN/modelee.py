@@ -31,7 +31,7 @@ class CustomConfig(Config):
     # Number of classes (including background)
     NUM_CLASSES = 1 + 1  # Background + Hole  # car and truck
 
-    RPN_ANCHOR_SCALES = (2, 4, 8, 16, 32)  # anchor side in pixels
+    RPN_ANCHOR_SCALES = (4, 8, 16, 32, 64)  # anchor side in pixels
     
     LEARNING_RATE = 0.001
     
@@ -60,7 +60,7 @@ class CustomDataset(utils.Dataset):
 
         assert subset in ["train", "val"]
         dataset_dir = os.path.join(dataset_dir, subset)
-        annotations1 = json.load(open('C:\Breathing_Bag_Defect\Mask_RCNN\Dataset_manual\\' + subset + '\\dataset.json'))
+        annotations1 = json.load(open('C:\Breathing_Bag_Defect\Mask_RCNN\Dataset\\' + subset + '\\dataset.json'))
 
         annotations = list(annotations1.values())  # don't need the dict keys
 
@@ -120,8 +120,8 @@ class CustomDataset(utils.Dataset):
 
 # %%
 model_dir = ""
-weight_path = "C:\\Breathing_Bag_Defect\\weights\\object20230511T2201\\mask_rcnn_object_0030.h5"
-dataset_dir = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset_manual"
+weight_path = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\logs\\object20230427T1027\\mask_rcnn_object_0030.h5"
+dataset_dir = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset"
 image_directory = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\Testset\\Test1"
 
 model = modellib.MaskRCNN(mode="inference", model_dir=model_dir, config=CustomConfig())
@@ -154,7 +154,7 @@ current_idx = 0
 
 # %%
 
-current_idx = 0
+current_idx = 280
 for i in range(current_idx, len(image_paths)):
     fig, (img_in, img_pr) = plt.subplots(1, 2, figsize=(16,10), dpi=200)
 
@@ -178,7 +178,7 @@ for i in range(current_idx, len(image_paths)):
 
     current_idx = (current_idx + 1) % len(image_paths)
 
-    plt.savefig(os.path.join("object20230509T1215_20", f"image_{current_idx}.png"))
+    plt.savefig(os.path.join("Dataset_Test", f"image_{current_idx}.png"))
 #plt.show()
 
 # %%
