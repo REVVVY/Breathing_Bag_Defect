@@ -60,7 +60,7 @@ class CustomDataset(utils.Dataset):
 
         assert subset in ["train", "val"]
         dataset_dir = os.path.join(dataset_dir, subset)
-        annotations1 = json.load(open('D:\\Övrigt\\Github Projects\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset_gen\\' + subset + '\\dataset.json'))
+        annotations1 = json.load(open('C:\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset_man\\' + subset + '\\dataset.json'))
 
         annotations = list(annotations1.values())  # don't need the dict keys
 
@@ -119,12 +119,12 @@ class CustomDataset(utils.Dataset):
             super(self.__class__, self).image_reference(image_id)
 
 model_dir = ""
-weight_path = "D:\\Övrigt\\Github Projects\\Breathing_Bag_Defect\\Mask_RCNN\\logs\\object20230506T0622\\mask_rcnn_object_0030.h5"
-dataset_dir = "D:\\Övrigt\\Github Projects\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset_gen"
+weight_path = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\logs\\object20230518T1339\\mask_rcnn_object_0030.h5"
+dataset_dir = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset_man"
 
-root_directory = "C:\\Test\\System_Test\\Place_Image_Folders"
-detected_directory = "C:\\Test\\System_Test\\Detected"
-non_detected_directory = "C:\\Test\\System_Test\\Non-Detected"
+root_directory = "C:\\lek\\Test\\System_Test\\Place_Image_Folders"
+detected_directory = "C:\\lek\\Test\\System_Test\\Detected"
+non_detected_directory = "C:\\lek\\Test\\System_Test\\Non-Detected"
 
 model = modellib.MaskRCNN(mode="inference", model_dir=model_dir, config=CustomConfig())
 print("Loading weights ", weight_path)
@@ -140,14 +140,12 @@ def process_folder(folder_path):
 
     for image in images:
         image_path = os.path.join(folder_path, image)
-        image_array = cv2.imread(image_path)
-        image_array = cv2.cvtColor(image_array, cv2.COLOR_BGR2RGB)
-        #image_array = cv2.imread("C:\\Test\\IMG_20230515_132010.jpg")
-        #print(image_array)
+        img = cv2.imread(image_path)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 
         # Perform object detection using the Mask R-CNN model
-        results = model.detect([image_array], verbose=1)
+        results = model.detect([img], verbose=1)
         r = results[0]  # Get the first (and only) result
 
         # Check if any objects are detected
@@ -155,14 +153,14 @@ def process_folder(folder_path):
             detections += 1
 
             fig, (img_in, img_pr) = plt.subplots(1, 2, figsize=(16,10), dpi=200)
-            img_in.imshow(image_array)
+            img_in.imshow(img)
             img_in.set_title(f"Original Image: {image_path}")
             img_in.set_xticks([])
             img_in.set_yticks([])
             # Generate output image with box and mask and save it in the output folder of the original image
-            visualize.display_instances(image_array, r['rois'], r['masks'], r['class_ids'], dataset.class_names, r['scores'], ax=img_pr)
+            visualize.display_instances(img, r['rois'], r['masks'], r['class_ids'], dataset.class_names, r['scores'], ax=img_pr)
 
-            img_pr.set_title("Predicted Deefect")
+            img_pr.set_title("Predicted Defect")
             img_pr.set_xticks([])
             img_pr.set_yticks([])
             plt.savefig(os.path.join(folder_path, "BB-Defect.png"))
