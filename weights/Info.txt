@@ -12,9 +12,10 @@ object20230505T1049: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4
 object20230507T1226: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATASET_LAB (BARA EGEN LABLADE BILDER) 	(---SPARAD--- KLAR)
 
 #RAPPORTEN
-object20230506T0622: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATASET_GEN (BARA GENERERADE BILDER) 		(---SPARAD--- KLAR)
-object20230508T0832: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATASET_MIX (MIX BÅDA DATASET) 			(---SPARAD--- KLAR)
-object20230509T1215: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATASET_MANUEL (BARA EGEN LABLADE BILDER) 	(---SPARAD--- KLAR)
+object20230506T0622: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. DATASET_GEN (BARA GENERERADE BILDER) 		(---SPARAD--- KLAR)
+object20230508T0832: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. DATASET_MIX (MIX BÅDA DATASET) 			(---SPARAD--- KLAR)
+object20230509T1215: anchor 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. DATASET_MANUEL (BARA EGEN LABLADE BILDER) 	(---SPARAD--- KLAR)
+object20230518T1339: anchor 4, 8 osv. 2000 steg. 1 images per gpu. Batch size: 1. DATASET_MAN (BARA EGEN LABLADE BILDER, Laptop)    (---SPARAD--- KLAR)
 
 #Ytterligare tester
 object20230510T0752: anchor 2, 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATA augmentation 50% horizontal flip. DATASET_MANUEL (BARA EGEN LABLADE BILDER)object20230511T2201: anchor 2, 4, 8 osv. 2000 steg. 4 images per gpu. Batch size: 4. RESNET101. DATASET_MANUEL (BARA EGEN LABLADE BILDER)
