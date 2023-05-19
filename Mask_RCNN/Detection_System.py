@@ -1,6 +1,8 @@
 import os
 import sys
 import argparse
+import shutil
+import time
 
 import numpy as np
 import json
@@ -58,7 +60,7 @@ class CustomDataset(utils.Dataset):
 
         assert subset in ["train", "val"]
         dataset_dir = os.path.join(dataset_dir, subset)
-        annotations1 = json.load(open('C:\Breathing_Bag_Defect\Mask_RCNN\Dataset\\' + subset + '\\dataset.json'))
+        annotations1 = json.load(open('D:\\Övrigt\\Github Projects\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset_gen\\' + subset + '\\dataset.json'))
 
         annotations = list(annotations1.values())  # don't need the dict keys
 
@@ -116,91 +118,69 @@ class CustomDataset(utils.Dataset):
         else:
             super(self.__class__, self).image_reference(image_id)
 
-
 model_dir = ""
-weight_path = "C:\\Breathing_Bag_Defect\\weights\\object20230427T1027\\mask_rcnn_object_0030.h5"
-dataset_dir = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset"
-image_directory = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset\\val"
+weight_path = "D:\\Övrigt\\Github Projects\\Breathing_Bag_Defect\\Mask_RCNN\\logs\\object20230506T0622\\mask_rcnn_object_0030.h5"
+dataset_dir = "D:\\Övrigt\\Github Projects\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset_gen"
+
+root_directory = "C:\\Test\\System_Test\\Place_Image_Folders"
+detected_directory = "C:\\Test\\System_Test\\Detected"
+non_detected_directory = "C:\\Test\\System_Test\\Non-Detected"
 
 model = modellib.MaskRCNN(mode="inference", model_dir=model_dir, config=CustomConfig())
 print("Loading weights ", weight_path)
 model.load_weights(weight_path, by_name=True)
 
-# input_image = "C:\\Breathing_Bag_Defect\\Mask_RCNN\\Dataset\\val\\im_12.jpg"
-
-# raw_image = cv2.imread(input_image)
-# raw_image = cv2.cvtColor(raw_image, cv2.COLOR_BGR2RGB)
-
-def load_image(path):
-    img = cv2.imread(path)
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    return img
-
-
-image_files = os.listdir(image_directory)
-image_files.sort()
-image_paths = [os.path.abspath(os.path.join(image_directory, x)) for x in image_files]
-image_paths = list(filter(lambda x: os.path.splitext(x)[1].lower() == ".jpg", image_paths))
-
 dataset = CustomDataset()
 dataset.load_custom(dataset_dir, "val")
 dataset.prepare()
 
-def predict(img, ax):
-    results = model.detect([img], verbose=1)
-    visualize.display_instances(img, results[0]['rois'], results[0]['masks'], results[0]['class_ids'], 
-                                dataset.class_names, results[0]['scores'], ax=ax)
+def process_folder(folder_path):
+    images = os.listdir(folder_path)
+    detections = 0
+
+    for image in images:
+        image_path = os.path.join(folder_path, image)
+        image_array = cv2.imread(image_path)
+        image_array = cv2.cvtColor(image_array, cv2.COLOR_BGR2RGB)
+        #image_array = cv2.imread("C:\\Test\\IMG_20230515_132010.jpg")
+        #print(image_array)
 
 
-fig, (img_in, img_pr) = plt.subplots(1, 2)
+        # Perform object detection using the Mask R-CNN model
+        results = model.detect([image_array], verbose=1)
+        r = results[0]  # Get the first (and only) result
 
-current_idx = 0
-current_image = load_image(image_paths[current_idx])
-fig.canvas.manager.set_window_title(f"image {current_idx + 1}/{len(image_paths)}")
+        # Check if any objects are detected
+        if r["rois"].shape[0] > 0:
+            detections += 1
 
-img_in.imshow(current_image)
-img_in.set_title(f"Original Image: {os.path.basename(image_paths[current_idx])}")
-img_in.set_xticks([])
-img_in.set_yticks([])
+            fig, (img_in, img_pr) = plt.subplots(1, 2, figsize=(16,10), dpi=200)
+            img_in.imshow(image_array)
+            img_in.set_title(f"Original Image: {image_path}")
+            img_in.set_xticks([])
+            img_in.set_yticks([])
+            # Generate output image with box and mask and save it in the output folder of the original image
+            visualize.display_instances(image_array, r['rois'], r['masks'], r['class_ids'], dataset.class_names, r['scores'], ax=img_pr)
 
-predict(current_image, img_pr)
-img_pr.set_title("Predicted Image")
-img_pr.set_xticks([])
-img_pr.set_yticks([])
+            img_pr.set_title("Predicted Deefect")
+            img_pr.set_xticks([])
+            img_pr.set_yticks([])
+            plt.savefig(os.path.join(folder_path, "BB-Defect.png"))
+            
+            # Move the image with the detection to the detected directory
+            print("Defect")
+            shutil.move(folder_path, detected_directory)
+            break  # Break the loop since a detection is found
 
-# define function for updating image
-def update_image():
-    img_in.set_title(f"Original Image: {os.path.basename(image_paths[current_idx])}")
+    if detections == 0:
+        # Move the entire folder to the 'detected' directory
+        print("No Defect")
+        shutil.move(folder_path, non_detected_directory)
 
-    fig.canvas.manager.set_window_title(f"image {current_idx + 1}/{len(image_paths)}")
-    current_image = load_image(image_paths[current_idx])
-    img_in.imshow(current_image)
-
-    predict(current_image, img_pr)
-    img_pr.set_title(f"image: {current_idx + 1}/{len(image_paths)}")
-
-    fig.canvas.draw()
-
-def next_ev(event):
-    global current_idx
-    current_idx = (current_idx + 1) % len(image_paths)
-    update_image()
-
-def prev_ev(event):
-    global current_idx
-    current_idx = (current_idx + len(image_paths) - 1) % len(image_paths)
-    update_image()
-
-# create "next" button and connect to update function
-ax_next = plt.axes([0.8, 0.05, 0.1, 0.075])
-button_next = Button(ax_next, 'Next')
-button_next.on_clicked(update_image)
-
-axprev = fig.add_axes([0.7, 0.05, 0.1, 0.075])
-axnext = fig.add_axes([0.81, 0.05, 0.1, 0.075])
-bnext = Button(axnext, 'Next')
-bnext.on_clicked(next_ev)
-bprev = Button(axprev, 'Previous')
-bprev.on_clicked(prev_ev)
-
-plt.show()
+while True:
+    print("Waiting for folders")
+    folders = [f.path for f in os.scandir(root_directory) if f.is_dir()]
+    for folder in folders:
+        print("folder found" + folder)
+        process_folder(folder)
+    time.sleep(2)  # Adjust the sleep duration as needed
