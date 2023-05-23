@@ -6,3 +6,5 @@ Mix_*
 Man_*
 weights*
 logs*
+Mask_RCNN/mrcnn/*
+Mask_RCNN\mask_rcnn_coco.h5
