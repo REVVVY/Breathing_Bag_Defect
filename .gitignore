@@ -1,5 +1,8 @@
 .ipynb_checkpoints
 Mask_RCNN/Dataset*
-object*
 Testset*
-Video_Test*
+Gen_*
+Mix_*
+Man_*
+Weights*
+logs*
