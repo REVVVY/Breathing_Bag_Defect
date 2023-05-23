@@ -1,2 +1,9 @@
 .ipynb_checkpoints
-Mask_RCNN/Dataset4/*
+Mask_RCNN/Dataset*
+Testset*
+Gen_*
+Mix_*
+Man_*
+weights*
+logs*
+Mask_RCNN/mrcnn/*
